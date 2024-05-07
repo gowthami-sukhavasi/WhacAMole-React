@@ -2,16 +2,16 @@ import PropTypes from "prop-types";
 import moleHill from "./assets/moleHill.png";
 import moleHead from "./assets/moleHead.png";
 import { useState, useEffect } from "react";
-function Whackamole({ rows, columns }) {
+function Whackamole({ rows, columns, timer }) {
   const [molePosition1, setMolePosition1] = useState({});
   const [molePosition2, setMolePosition2] = useState({});
-  const [timeLeft, setTimeLeft] = useState(15);
+  const [timeLeft, setTimeLeft] = useState(timer);
   const [gameStatus, setGameStatus] = useState(false);
   const [score, setScore] = useState(null);
 
   const randomIndex = () => {
-    const randomX = Math.floor(Math.random() * 3);
-    const randomY = Math.floor(Math.random() * 3);
+    const randomX = Math.floor(Math.random() * rows);
+    const randomY = Math.floor(Math.random() * columns);
     return { x: randomX, y: randomY };
   };
 
@@ -51,7 +51,7 @@ function Whackamole({ rows, columns }) {
   const handleStart = () => {
     setGameStatus((prev) => !prev);
     setScore(0);
-    setTimeLeft(15);
+    setTimeLeft(timer);
   };
 
   const updateScore = () => {
@@ -120,9 +120,11 @@ export default Whackamole;
 Whackamole.propTypes = {
   rows: PropTypes.number,
   columns: PropTypes.number,
+  timer: PropTypes.number,
 };
 
 Whackamole.deafultProps = {
   rows: 3,
   columns: 3,
+  timer: 15,
 };
