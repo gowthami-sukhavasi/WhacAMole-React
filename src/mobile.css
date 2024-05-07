@@ -1,0 +1,31 @@
+@media only screen and (max-width: 600px) {
+
+    body {
+        font-size: medium;
+    }
+
+    .header {
+        width: 100%;
+        margin-top: 20px;
+        padding-bottom: 10px;
+    }
+
+    .start-button {
+        padding: 15px;
+        font-size: small;
+    }
+
+    .mole-head-div {
+        height: 10px;
+    }
+
+    .mole-head {
+        width: 86px;
+        height: 46px;
+    }
+
+    .mole-hill {
+        width: 100px;
+        height: 80px;
+    }
+}

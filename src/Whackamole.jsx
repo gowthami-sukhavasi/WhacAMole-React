@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 function Whackamole({ rows, columns }) {
   const [molePosition1, setMolePosition1] = useState({});
   const [molePosition2, setMolePosition2] = useState({});
-  const [timeLeft, setTimeLeft] = useState(5);
+  const [timeLeft, setTimeLeft] = useState(15);
   const [gameStatus, setGameStatus] = useState(false);
   const [score, setScore] = useState(null);
 
@@ -51,7 +51,7 @@ function Whackamole({ rows, columns }) {
   const handleStart = () => {
     setGameStatus((prev) => !prev);
     setScore(0);
-    setTimeLeft(5);
+    setTimeLeft(15);
   };
 
   const updateScore = () => {
