@@ -1,8 +1,23 @@
-# React + Vite
+# Whack-A-Mole Game
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Built a popular arcade game where players attempt to hit moles as they pop up from holes in a board.
 
-Currently, two official plugins are available:
+Technologies used: React, JavaScript, HTML and CSS.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+The game has a grid of 9 holes.
+When the game starts, a mole will pop up randomly from one of the holes.
+The player must click on the mole to whack it. When the player whacks the mole, they will get a point.
+If the player does not whack the mole within 1.5 seconds, the mole will disappear.
+The next mole randomly appears from one of the holes and the process repeats.
+The player has 15 seconds to hit as many moles as possible.
+The game ends when the timer runs out, the score is displayed and the player has the option to play again.
+
+## Deployment
+
+To deploy this project run
+
+```bash
+  npm run deploy
+```
+
+- [🚀 Live Demo Link](https://gowthami.live/WhacAMole-React/)
