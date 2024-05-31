@@ -8,6 +8,8 @@ function Whackamole({ rows, columns, timer }) {
   const [timeLeft, setTimeLeft] = useState(timer);
   const [gameStatus, setGameStatus] = useState(false);
   const [score, setScore] = useState(null);
+  const [hideMole1, setHideMole1] = useState(false);
+  const [hideMole2, setHideMole2] = useState(false);
 
   const randomIndex = () => {
     const randomX = Math.floor(Math.random() * rows);
@@ -17,18 +19,28 @@ function Whackamole({ rows, columns, timer }) {
 
   const changeMoleIndex = () => {
     if (gameStatus) {
-      const timerID = setTimeout(() => {
-        setMolePosition1(randomIndex());
-        setMolePosition2(randomIndex());
-      }, 1500);
-
-      return () => clearTimeout(timerID);
+      const newMolePosition1 = randomIndex();
+      let newMolePosition2;
+      do {
+        newMolePosition2 = randomIndex();
+      } while (
+        newMolePosition2.x === newMolePosition1.x &&
+        newMolePosition2.y === newMolePosition1.y
+      );
+      setMolePosition1(newMolePosition1);
+      setMolePosition2(newMolePosition2);
+      setHideMole1(false);
+      setHideMole2(false);
     }
   };
 
   useEffect(() => {
-    changeMoleIndex();
-  }, [gameStatus, molePosition1, molePosition2]);
+    const moleTimer = setInterval(() => {
+      changeMoleIndex();
+    }, 1500);
+
+    return () => clearInterval(moleTimer);
+  }, [gameStatus]);
 
   const gameTimer = () => {
     if (gameStatus && timeLeft > 0) {
@@ -54,19 +66,29 @@ function Whackamole({ rows, columns, timer }) {
     setTimeLeft(timer);
   };
 
-  const updateScore = () => {
+  const updateScore = (moleIndex) => {
     setScore((prev) => prev + 1);
+    if (moleIndex === 1) {
+      setHideMole1(true);
+    } else {
+      setHideMole2(true);
+    }
   };
 
-  const displayMole = (index1, index2) => {
+  const displayMole = (index1, index2, moleIndex) => {
+    const molePosition = moleIndex === 1 ? molePosition1 : molePosition2;
+    const hideMole = moleIndex === 1 ? hideMole1 : hideMole2;
     return (
       gameStatus &&
-      ((molePosition1?.x === index1 && molePosition1?.y === index2 && (
-        <img onClick={updateScore} className="mole-head" src={moleHead} />
-      )) ||
-        (molePosition2?.x === index1 && molePosition2?.y === index2 && (
-          <img onClick={updateScore} className="mole-head" src={moleHead} />
-        )))
+      molePosition?.x === index1 &&
+      molePosition?.y === index2 && (
+        <img
+          onClick={() => updateScore(moleIndex)}
+          className={["mole-head", hideMole && "hideMole"].join(" ")}
+          src={moleHead}
+          alt="mole"
+        />
+      )
     );
   };
 
@@ -101,7 +123,8 @@ function Whackamole({ rows, columns, timer }) {
                 .map((_ele, posY) => (
                   <div className="column" key={posY}>
                     <div className="mole-head-div">
-                      {displayMole(posX, posY)}
+                      {displayMole(posX, posY, 1)}
+                      {displayMole(posX, posY, 2)}
                     </div>
                     <div>
                       <img className="mole-hill" src={moleHill} />
