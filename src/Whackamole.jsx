@@ -82,12 +82,14 @@ function Whackamole({ rows, columns, timer }) {
       gameStatus &&
       molePosition?.x === index1 &&
       molePosition?.y === index2 && (
-        <img
-          onClick={() => updateScore(moleIndex)}
-          className={["mole-head", hideMole && "hideMole"].join(" ")}
-          src={moleHead}
-          alt="mole"
-        />
+        <div className="mole-hill">
+          <img
+            onClick={() => updateScore(moleIndex)}
+            className={`mole-head ${hideMole ? "disappear" : "appear"}`}
+            src={moleHead}
+            alt="mole"
+          />
+        </div>
       )
     );
   };

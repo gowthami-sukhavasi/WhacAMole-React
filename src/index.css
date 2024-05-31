@@ -61,22 +61,28 @@ body {
 }
 
 .mole-head {
+  position: absolute;
+  top: 75%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   width: 136px;
   height: 116px;
   object-fit: contain;
   cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.5s ease;
 }
 
-.hideMole {
-  display: none;
+.appear {
+  opacity: 1;
 }
 
-.hidden {
-  width: 0px;
-  height: 0px;
+.disappear {
+  opacity: 0;
 }
 
 .mole-hill {
+  position: relative;
   width: 200px;
   height: 80px;
   object-fit: contain;
