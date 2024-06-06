@@ -20,6 +20,8 @@
     }
 
     .mole-head {
+        top: 45%;
+        left: 50%;
         width: 106px;
         height: 80px;
     }

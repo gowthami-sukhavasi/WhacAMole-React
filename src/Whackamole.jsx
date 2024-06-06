@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
-import moleHill from "./assets/moleHill.png";
 import moleHead from "./assets/moleHead.png";
+import MoleHill from "./components/MoleHill";
+import ScoreBoard from "./components/ScoreBoard";
 import { useState, useEffect } from "react";
 function Whackamole({ rows, columns, timer }) {
   const [molePosition1, setMolePosition1] = useState({});
@@ -97,23 +98,12 @@ function Whackamole({ rows, columns, timer }) {
   return (
     <div className="game-container">
       <div className="header">
-        <div className="score-board">
-          {score === null ? (
-            <button className="start-button" onClick={handleStart}>
-              Start Game
-            </button>
-          ) : (
-            <>
-              <p>Score: {score}</p>
-              {!gameStatus && (
-                <button className="start-button" onClick={handleStart}>
-                  Play Again
-                </button>
-              )}
-              <p>Timer : {timeLeft}</p>
-            </>
-          )}
-        </div>
+        <ScoreBoard
+          score={score}
+          gameStatus={gameStatus}
+          handleStart={handleStart}
+          timeLeft={timeLeft}
+        />
       </div>
       <div className="grid">
         {Array(rows)
@@ -129,7 +119,7 @@ function Whackamole({ rows, columns, timer }) {
                       {displayMole(posX, posY, 2)}
                     </div>
                     <div>
-                      <img className="mole-hill" src={moleHill} />
+                      <MoleHill />
                     </div>
                   </div>
                 ))}
